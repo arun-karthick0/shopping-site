@@ -1,0 +1,24 @@
+.login_page {
+  max-height: 300px;
+  max-width: 300px;
+  position: relative;
+  left: 40%;
+  border: 1px solid black;
+  margin: 50px 0;
+  background-color: rgb(255, 255, 255);
+}
+.login_page h3 {
+  margin: 40px;
+  text-align: center;
+}
+.login_page .card {
+  position: relative;
+  top: 30%;
+  border: 1px solid black;
+  margin: 50px 50px 50px 50px;
+}
+
+.login_page .card:hover {
+  background-color: green;
+  color: #fff;
+}
