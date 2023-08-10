@@ -11,6 +11,10 @@ app.use(cors());
 
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
+app.get("/", (req, res) => {
+  res.json("welcome");
+});
+
 app.post("/create-checkout-session", async (req, res) => {
   const line_items = req.body.data.cartItems.map((item) => {
     console.log(item);
@@ -31,8 +35,8 @@ app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: "payment",
-    success_url: "http://localhost:3000/cart/success",
-    cancel_url: "http://localhost:3000/cart/cancel",
+    success_url: "https://crowded-ant-robe.cyclic.app/cart/success",
+    cancel_url: "https://crowded-ant-robe.cyclic.app/cart/cancel",
   });
 
   try {

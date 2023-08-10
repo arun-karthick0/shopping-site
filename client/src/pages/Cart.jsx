@@ -30,7 +30,9 @@ const Cart = ({ user }) => {
     };
 
     axios
-      .post("http://localhost:8756/create-checkout-session", { data })
+      .post("https://crowded-ant-robe.cyclic.app/create-checkout-session", {
+        data,
+      })
       .then((res) => {
         if (res.data.url) {
           window.location.href = res.data.url;
