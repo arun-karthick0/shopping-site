@@ -44,7 +44,7 @@ const NavBar = ({ user, setUser }) => {
       <Container className="navbar-container">
         <Navbar.Brand to="/">
           <ion-icon name="bag"></ion-icon>
-          <h1 className="logo">furniture cart</h1>
+          <h1 className="logo">shopping cart</h1>
         </Navbar.Brand>
 
         <div className="d-flex">
@@ -82,11 +82,7 @@ const NavBar = ({ user, setUser }) => {
             onClick={() => {
               setExpand(expand ? false : "expanded");
             }}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </Navbar.Toggle>
+          ></Navbar.Toggle>
         </div>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -124,7 +120,19 @@ const NavBar = ({ user, setUser }) => {
             </Nav.Item>
             <Nav.Item className="expanded-cart">
               {user ? (
-                <span style={{ margin: "3px" }}>
+                <span style={{ margin: "0 30px" }}>
+                  <span>
+                    <img
+                      src={user.photoURL}
+                      alt="pic"
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        marginRight:"10px"
+                      }}
+                    />
+                  </span>
                   <span style={{ fontSize: "1rem", marginRight: "10px" }}>
                     {user?.displayName}
                   </span>{" "}
@@ -133,7 +141,7 @@ const NavBar = ({ user, setUser }) => {
                       style={{
                         textDecoration: "none",
                         fontSize: "1.3rem",
-                        marginRight: "10px",
+                        margin:"0 20px",
                         id: "logout",
                       }}
                       onClick={logOut}

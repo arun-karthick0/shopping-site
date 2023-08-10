@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { DataContainer } from "../App";
 import { Col, Container, Row } from "react-bootstrap";
+import axios from "axios";
 
 const Cart = ({ user }) => {
   // console.log(user);
@@ -19,40 +20,24 @@ const Cart = ({ user }) => {
       setCartItem(JSON.parse(storedCart));
     }
   }, []);
-  // console.log(CartItem, user);
+  console.log(CartItem, user);
 
   const checkOut = () => {
-    if (CartItem.length === 0) {
-      console.error("No items in Cart");
-      return;
-    }
+    const data = {
+      user: user,
+      cartItems: CartItem,
+      totalPrice: totalPrice,
+    };
 
-    const itemsForCheckout = CartItem.map((item) => ({
-      productName: item.productName,
-      quantity: item.qty,
-      price: item.price,
-    }));
-    console.log(itemsForCheckout);
-
-    fetch("http://localhost:4000/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "cors",
-      body: JSON.stringify({
-        items: itemsForCheckout,
-      }),
-    })
+    axios
+      .post("http://localhost:8756/create-checkout-session", { data })
       .then((res) => {
-        if (res.ok) return res.json();
-        return res.json().then((json) => Promise.reject(json));
+        if (res.data.url) {
+          window.location.href = res.data.url;
+        }
       })
-      .then(({ url }) => {
-        window.location = url;
-      })
-      .catch((e) => {
-        console.log(e.error);
+      .catch((err) => {
+        console.log(err);
       });
   };
 
