@@ -35,8 +35,8 @@ app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: "payment",
-    success_url: "http://localhost:3000/cart/success",
-    cancel_url: "http://localhost:3000/cart/cancel",
+    success_url: "https://shopping-site-001.netlify.app/cart/success",
+    cancel_url: "https://shopping-site-001.netlify.app/cart/cancel",
   });
 
   try {
