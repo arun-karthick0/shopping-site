@@ -30,7 +30,7 @@ const Cart = ({ user }) => {
     };
 
     axios
-      .post("http://localhost:8756/create-checkout-session", {
+      .post("https://crowded-ant-robe.cyclic.app/create-checkout-session", {
         data,
       })
       .then((res) => {
