@@ -7,7 +7,11 @@ const cors = require("cors");
 app.use(express.json());
 const PORT = 8756;
 connection = process.env.CONNECTION_URL;
-app.use(cors({ origin: "https://crowded-ant-robe.cyclic.app" }));
+app.use(cors());
+
+app.get("/", (req, res) => {
+  res.json("welcome");
+});
 
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
@@ -31,8 +35,8 @@ app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: "payment",
-    success_url: "/cart/success",
-    cancel_url: "/cart/cancel",
+    success_url: "http://localhost:3000/cart/success",
+    cancel_url: "http://localhost:3000/cart/cancel",
   });
 
   try {
