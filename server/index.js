@@ -35,8 +35,8 @@ app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: "payment",
-    success_url: "https://crowded-ant-robe.cyclic.app/cart/success",
-    cancel_url: "https://crowded-ant-robe.cyclic.app/cart/cancel",
+    success_url: "/cart/success",
+    cancel_url: "/cart/cancel",
   });
 
   try {
