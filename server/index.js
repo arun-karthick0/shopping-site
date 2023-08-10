@@ -7,13 +7,9 @@ const cors = require("cors");
 app.use(express.json());
 const PORT = 8756;
 connection = process.env.CONNECTION_URL;
-app.use(cors());
+app.use(cors({ origin: "https://crowded-ant-robe.cyclic.app" }));
 
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
-
-app.get("/", (req, res) => {
-  res.json("welcome");
-});
 
 app.post("/create-checkout-session", async (req, res) => {
   const line_items = req.body.data.cartItems.map((item) => {
