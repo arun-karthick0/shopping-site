@@ -8,7 +8,6 @@ import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 const NavBar = ({ user }) => {
   // console.log(user.photoURL);
-  console.log(user);
 
   const { CartItem, setCartItem } = useContext(DataContainer);
   const [expand, setExpand] = useState(false);
@@ -109,9 +108,15 @@ const NavBar = ({ user }) => {
               </Link>
             </Nav.Item>
 
-            <Nav.Item className="expanded-cart">
+            <Nav.Item className="expanded-cart ">
               {user ? (
-                <span style={{ margin: "0 30px" }}>
+                <span
+                  style={{
+                    margin: "0 30px",
+                    display: "flex",
+                    flexShrink: "2",
+                  }}
+                >
                   <span>
                     <img
                       src={user?.photoURL}

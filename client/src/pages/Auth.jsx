@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { auth, google } from "../firebase";
+import { auth, google, db } from "../firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { getDoc, doc } from "firebase/firestore";
 
 function Auth({ user, setUser }) {
   // console.log(user, setUser);
@@ -24,11 +25,33 @@ function Auth({ user, setUser }) {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        // console.log(res.user.displayName);
-        toast.success("login successful");
-        navigate("/");
+        const userUid = res.user.uid;
+        const userDocRef = doc(db, "users", userUid);
+
+        getDoc(userDocRef)
+          .then((docSnapshot) => {
+            if (docSnapshot.exists()) {
+              const userData = docSnapshot.data();
+              console.log(userData);
+              let user = {
+                displayName: `${userData?.firstName} ${userData?.lastName}`,
+                photoURL: `${userData?.photoURL}`,
+              };
+              setUser(user);
+              toast.success("Login successful");
+              navigate("/");
+            } else {
+              toast.error("User data not found");
+            }
+          })
+          .catch((error) => {
+            toast.error("Error fetching user data");
+            console.error(error);
+          });
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        toast.error("Login failed");
+      });
   };
 
   return (
