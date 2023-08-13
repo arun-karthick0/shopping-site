@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 
 * {
   padding: 0;
@@ -13,7 +13,7 @@ html {
 body {
   background-color: #ffffff;
   margin: 0;
-  font-family: "Lato", sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -150,13 +150,12 @@ button {
   }
 }
 
-
 /*   ---Home Slider---   */
 
 .homeSlide {
   display: flex;
   justify-content: center;
-  background-color: #f6f9fc;
+  background-color: #afd3ff;
   padding-bottom: 0 !important;
 }
 

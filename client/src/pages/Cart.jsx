@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { DataContainer } from "../App";
 import { Col, Container, Row } from "react-bootstrap";
@@ -6,6 +6,7 @@ import axios from "axios";
 
 const Cart = ({ user }) => {
   // console.log(user);
+  const navigate = useNavigate();
   const { CartItem, setCartItem, addToCart, decreaseQty, deleteProduct } =
     useContext(DataContainer);
   const totalPrice = CartItem.reduce(
@@ -30,10 +31,11 @@ const Cart = ({ user }) => {
     };
 
     axios
-      .post("https://crowded-ant-robe.cyclic.app/create-checkout-session", {
+      .post("http://localhost:8756/create-checkout-session", {
         data,
       })
       .then((res) => {
+        // console.log(res.data.url);
         if (res.data.url) {
           window.location.href = res.data.url;
         }
@@ -117,7 +119,7 @@ const Cart = ({ user }) => {
             ) : (
               <button className="btn btn-info  w-100">
                 <Link
-                  to="/login"
+                  to="/auth"
                   className="text-center"
                   style={{ textDecoration: "none" }}
                 >

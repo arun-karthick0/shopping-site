@@ -10,6 +10,7 @@ import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
+import Auth from "./pages/Auth";
 
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
@@ -101,7 +102,14 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart user={user} />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/auth"
+            element={<Auth user={user} setUser={setUser} />}
+          />
           <Route path="/cart/success" element={<Success />} />
           <Route path="/cart/cancel" element={<Cancel />} />
         </Routes>

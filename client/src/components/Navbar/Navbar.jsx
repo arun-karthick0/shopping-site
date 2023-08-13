@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
-const NavBar = ({ user, setUser }) => {
-  // console.log(user.displayName);
+const NavBar = ({ user }) => {
+  // console.log(user.photoURL);
+  console.log(user);
 
   const { CartItem, setCartItem } = useContext(DataContainer);
   const [expand, setExpand] = useState(false);
@@ -108,28 +109,18 @@ const NavBar = ({ user, setUser }) => {
               </Link>
             </Nav.Item>
 
-            <Nav.Item>
-              <Link
-                aria-label="Go to Cart Page"
-                className="navbar-link"
-                to="/cart"
-                onClick={() => setExpand(false)}
-              >
-                <span className="nav-link-label">Cart</span>
-              </Link>
-            </Nav.Item>
             <Nav.Item className="expanded-cart">
               {user ? (
                 <span style={{ margin: "0 30px" }}>
                   <span>
                     <img
-                      src={user.photoURL}
+                      src={user?.photoURL}
                       alt="pic"
                       style={{
                         width: "30px",
                         height: "30px",
                         borderRadius: "50%",
-                        marginRight:"10px"
+                        marginRight: "10px",
                       }}
                     />
                   </span>
@@ -141,7 +132,7 @@ const NavBar = ({ user, setUser }) => {
                       style={{
                         textDecoration: "none",
                         fontSize: "1.3rem",
-                        margin:"0 20px",
+                        margin: "0 20px",
                         id: "logout",
                       }}
                       onClick={logOut}
@@ -152,7 +143,7 @@ const NavBar = ({ user, setUser }) => {
                   </span>
                 </span>
               ) : (
-                <Link className="login" to="/login">
+                <Link className="login" to="/auth">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
