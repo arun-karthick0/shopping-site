@@ -4,8 +4,6 @@ import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useState } from "react";
 function Card({ user }) {
-  console.log(user.email);
-
   const [isVisible, setIsVisible] = useState("");
 
   const toggleCard = () => {
@@ -28,7 +26,6 @@ function Card({ user }) {
               <img src={user?.photoURL} alt="" />
             </div>
             <div style={{ marginTop: "30px" }}>{user?.displayName}</div>
-            <div style={{ marginTop: "30px" }}>{user?.email}</div>
             <button
               onClick={logOut}
               className="btn btn-primary"
