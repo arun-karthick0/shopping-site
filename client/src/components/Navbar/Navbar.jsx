@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "./navbar.css";
+import Card from "../card/Card";
 import { DataContainer } from "../../App";
 import { Link } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
-import { toast } from "react-toastify";
+
 const NavBar = ({ user }) => {
   // console.log(user.photoURL);
 
@@ -13,13 +12,6 @@ const NavBar = ({ user }) => {
   const [expand, setExpand] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   // fixed Header
-
-  const logOut = () => {
-    if (auth) {
-      signOut(auth);
-      toast.success("logout");
-    }
-  };
 
   function scrollHandler() {
     if (window.scrollY >= 100) {
@@ -110,43 +102,7 @@ const NavBar = ({ user }) => {
 
             <Nav.Item className="expanded-cart ">
               {user ? (
-                <span
-                  style={{
-                    margin: "0 30px",
-                    display: "flex",
-                    flexShrink: "2",
-                  }}
-                >
-                  <span>
-                    <img
-                      src={user?.photoURL}
-                      alt="pic"
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "50%",
-                        marginRight: "10px",
-                      }}
-                    />
-                  </span>
-                  <span style={{ fontSize: "1rem", marginRight: "10px" }}>
-                    {user?.displayName}
-                  </span>{" "}
-                  <span>
-                    <Link
-                      style={{
-                        textDecoration: "none",
-                        fontSize: "1.3rem",
-                        margin: "0 20px",
-                        id: "logout",
-                      }}
-                      onClick={logOut}
-                    >
-                      logout
-                    </Link>
-                    {""}
-                  </span>
-                </span>
+                <Card user={user} />
               ) : (
                 <Link className="login" to="/auth">
                   <svg

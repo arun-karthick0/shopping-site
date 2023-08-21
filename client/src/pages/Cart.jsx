@@ -31,7 +31,7 @@ const Cart = ({ user }) => {
     };
 
     axios
-      .post("https://crowded-ant-robe.cyclic.app/create-checkout-session", {
+      .post("https://shopping-site-ejw5.onrender.com/create-checkout-session", {
         data,
       })
       .then((res) => {
