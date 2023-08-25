@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 import { auth } from "./firebase";
+import About from "./components/about/About";
 import { onAuthStateChanged } from "firebase/auth";
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
@@ -102,6 +103,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart user={user} />} />
+          <Route path="/about" element={<About />} />
           <Route
             path="/login"
             element={<Login user={user} setUser={setUser} />}

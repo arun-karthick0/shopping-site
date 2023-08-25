@@ -1,0 +1,24 @@
+.about {
+  text-align: center;
+}
+.about_card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 50vh;
+}
+
+.form {
+  background-color: rgb(226, 226, 226);
+  margin-left: 10px;
+}
+h4 {
+  text-decoration: underline;
+}
+.form input {
+  margin: 10px 0;
+  padding: 5px;
+  max-width: max-content;
+  border: 1px solid grey;
+}

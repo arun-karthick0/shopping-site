@@ -89,7 +89,7 @@ const NavBar = ({ user }) => {
               </Link>
             </Nav.Item>
 
-            <Nav.Item>
+            {/* <Nav.Item>
               <Link
                 aria-label="Go to Shop Page"
                 className="navbar-link"
@@ -98,7 +98,7 @@ const NavBar = ({ user }) => {
               >
                 <span className="nav-link-label">Shop</span>
               </Link>
-            </Nav.Item>
+            </Nav.Item> */}
 
             <Nav.Item className="expanded-cart ">
               {user ? (

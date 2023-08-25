@@ -21,3 +21,25 @@
   object-fit: cover;
   height: 100px;
 }
+
+.card .profile_circle {
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  background-color: rgb(228, 228, 228);
+  border-radius: 60%;
+}
+.card .profile_circle .name {
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.shop {
+  text-decoration: underline;
+  margin-top: 15px;
+}
+
+.shop:hover {
+  background-color: rgb(206, 206, 206);
+}
