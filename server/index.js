@@ -7,8 +7,16 @@ const cors = require("cors");
 app.use(express.json());
 const PORT = 8756;
 connection = process.env.CONNECTION_URL;
-
-app.use(cors());
+const allowedOrigins = [
+  // "http://localhost:3000",
+  "https://shopping-site-001.netlify.app",
+  "https://shopping-site-002.netlify.app",
+];
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
 
 app.get("/", (req, res) => {
   res.json("welcome");
@@ -36,9 +44,9 @@ app.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items,
     mode: "payment",
-    success_url: "https://shopping-site-002.netlify.app/cart/success",
+    success_url: "https://shopping-site-001.netlify.app/cart/success",
 
-    cancel_url: "https://shopping-site-002.netlify.app/cart/cancel",
+    cancel_url: "https://shopping-site-001.netlify.app/cart/cancel",
   });
 
   try {
