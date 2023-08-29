@@ -4,9 +4,9 @@
 
 .card .card_info {
   position: absolute;
-  width: 300px;
+  width: 250px;
   z-index: 1;
-  height: 400px;
+  height: 280px;
   border-radius: 5px;
   right: 5%;
   top: 150%;
@@ -15,29 +15,30 @@
 }
 
 .card .card_info .card_image img {
-  margin-top: 50px;
+  margin-top: 20px;
   border-radius: 50%;
-  width: 100px;
+  width: 60px;
   object-fit: cover;
-  height: 100px;
+  height: 60px;
 }
 
 .card .profile_circle {
   border: 1px solid black;
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  background-color: rgb(228, 228, 228);
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+  margin-bottom: 5px;
+  background-color: rgb(77, 76, 76);
   border-radius: 60%;
 }
 .card .profile_circle .name {
-  font-size: 1.1rem;
-  color: #000;
+  font-size: 1rem;
+  color: #fff;
 }
 
 .shop {
-  text-decoration: underline;
-  margin-top: 15px;
+  /* text-decoration: underline; */
+  margin-top: 5px;
 }
 
 .shop:hover {

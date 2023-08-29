@@ -36,20 +36,30 @@ function Card({ user }) {
             <div className="card_image">
               <img src={user?.photoURL} alt="" />
             </div>
-            <div style={{ marginTop: "30px", fontSize: "1.6rem" }}>
+            <div style={{ marginTop: "10px", fontSize: "1rem" }}>
               {user?.displayName}
             </div>
 
             <div onClick={() => navigate("/shop")} className="shop">
               Shop
             </div>
+            <div onClick={() => navigate("/orders")} className="shop">
+              My order
+            </div>
             <div onClick={() => navigate("/about")} className="shop">
               about
             </div>
+
             <button
               onClick={logOut}
-              className="btn btn-primary"
-              style={{ width: "80%", marginTop: "20px" }}
+              className="btn"
+              style={{
+                width: "80%",
+                marginTop: "10px",
+                backgroundColor: "red",
+                color: "white",
+                padding: "2px",
+              }}
             >
               Logout
             </button>

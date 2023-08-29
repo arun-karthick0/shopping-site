@@ -13,9 +13,11 @@ const Footer = () => {
               <h1>shopping cart</h1>
             </div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-              libero id et, in gravida. Sit diam duis mauris nulla cursus. Erat
-              et lectus vel ut sollicitudin elit at amet.
+              The sale of services involves the exchange of monetary value in
+              return for value to customers that want to achieve specific
+              outcomes. Put another way, a service is a means of delivering
+              value to customers by facilitating specific outcomes that
+              customers expect to achieve.
             </p>
           </Col>
 

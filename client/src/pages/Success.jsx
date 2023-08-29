@@ -1,5 +1,6 @@
-
+import { useNavigate } from "react-router-dom";
 const PaymentSuccess = () => {
+  const navigate = useNavigate();
   return (
     <div className="payment-success-container">
       <i className="fas fa-check-circle check-icon"></i>

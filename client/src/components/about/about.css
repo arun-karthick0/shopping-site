@@ -6,7 +6,7 @@
   grid-template-columns: 1fr 1fr;
   max-width: 1000px;
   margin: 0 auto;
-  height: 50vh;
+  height: 50%;
 }
 
 .form {

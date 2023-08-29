@@ -78,7 +78,7 @@
   }
 
   .navbar-nav .nav-item::after {
-    display: none !important;
+    display: none;
   }
 }
 

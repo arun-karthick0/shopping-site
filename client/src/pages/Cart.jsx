@@ -4,9 +4,9 @@ import { DataContainer } from "../App";
 import { Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 
-const Cart = ({ user }) => {
+const Cart = ({ user, setOrders, orders }) => {
   // console.log(user);
-  const navigate = useNavigate();
+
   const { CartItem, setCartItem, addToCart, decreaseQty, deleteProduct } =
     useContext(DataContainer);
   const totalPrice = CartItem.reduce(
@@ -21,8 +21,9 @@ const Cart = ({ user }) => {
       setCartItem(JSON.parse(storedCart));
     }
   }, []);
-  console.log(CartItem, user);
 
+  setOrders(CartItem);
+  console.log(orders);
   const checkOut = () => {
     const data = {
       user: user,
@@ -35,10 +36,10 @@ const Cart = ({ user }) => {
         data,
       })
       .then((res) => {
-        // console.log(res.data.url);
         if (res.data.url) {
           window.location.href = res.data.url;
         }
+        setOrders(true);
       })
       .catch((err) => {
         console.log(err);
