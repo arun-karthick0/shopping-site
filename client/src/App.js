@@ -130,7 +130,7 @@ function App() {
           <Route
             path="/orders"
             element={
-              <Orders orders={orders} cartItem={CartItem} />
+              <Orders orders={orders} cartItem={CartItem} users={user} />
             }
           />
         </Routes>

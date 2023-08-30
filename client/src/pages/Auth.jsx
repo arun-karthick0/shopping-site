@@ -109,10 +109,10 @@ function Auth({ user, setUser }) {
                 </div>
               </span>
             </form>
-            <div className="mt-3 text-center">or</div>
-            <button onClick={google_signin} className="btn btn-primary ">
+            {/* <div className="mt-3 text-center">or</div> */}
+            {/* <button onClick={google_signin} className="btn btn-primary ">
               Google
-            </button>
+            </button> */}
             <span className="text-center" style={{ margin: "20px" }}>
               New user?
               <Link to={"/login"} style={{ color: "blue" }}>

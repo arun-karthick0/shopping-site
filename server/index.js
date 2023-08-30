@@ -7,8 +7,10 @@ const cors = require("cors");
 app.use(express.json());
 const PORT = 8756;
 connection = process.env.CONNECTION_URL;
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 const allowedOrigins = [
-  // "http://localhost:3000",
+  "http://localhost:3000",
   "https://shopping-site-001.netlify.app",
   "https://shopping-site-002.netlify.app",
 ];
@@ -25,8 +27,8 @@ app.get("/", (req, res) => {
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 app.post("/create-checkout-session", async (req, res) => {
+  const email = req.body.data.user;
   const line_items = req.body.data.cartItems.map((item) => {
-    console.log(item);
     return {
       price_data: {
         currency: "usd",
@@ -45,13 +47,13 @@ app.post("/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     success_url: "https://shopping-site-001.netlify.app/cart/success",
-
     cancel_url: "https://shopping-site-001.netlify.app/cart/cancel",
   });
 
   try {
     const checkoutSessions = req.body.data.cartItems.map((item) => {
       return new CheckoutSession({
+        email: email,
         productName: item.productName,
         productQty: item.qty,
         productPrice: item.price,
@@ -61,9 +63,27 @@ app.post("/create-checkout-session", async (req, res) => {
     });
 
     await CheckoutSession.insertMany(checkoutSessions);
+
     res.send({ url: session.url });
   } catch (error) {
     console.log(error);
+  }
+});
+
+app.get("/getdata", async (req, res) => {
+  const email = req.body.user;
+
+  try {
+    const data = await CheckoutSession.find(email);
+    console.log(data);
+    if (data.length === 0) {
+      res.status(404).json({ error: "No data found for this email" });
+    } else {
+      res.json(data);
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "An error occurred" });
   }
 });
 
@@ -72,67 +92,5 @@ mongoose
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-  .then(app.listen(PORT, () => console.log(`Running on port:${PORT}`)))
+  .then(app.listen(PORT, () => console.log(`http://localhost:${PORT}`)))
   .catch((err) => console.log(err));
-
-// Payment_method_options: ["card"],
-
-// shipping_address_collection: { allowed_countries: ["us"] },
-// shipping_options: [
-//   {
-//     shipping_rate_data: {
-//       type: "fixed amount",
-//       fixed_amount: { amount: 1, currency: "usd" },
-//       display_name: "minimum wage for shipping 1 usd",
-//       delivery_status: {
-//         minimum: { unit: "hour", value: 2 },
-//         maximum: { unit: "hour", value: 3 },
-//       },
-//     },
-//   },
-// ],
-// phone_number_collection: {
-//   enabled: true,
-// },
-// let endpointSecret;
-//  endpointSecret = process.env.webhook_secret;
-
-// app.post("/webhook", express.raw({ type: "application/json" }), (req, res) => {
-//   const sig = req.headers["stripe-signature"];
-
-//   let data, eventTypes;
-
-//   if (endpointSecret) {
-//     let event;
-
-//     try {
-//       event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-//     } catch (err) {
-//       res.status(400).send(`Webhook Error: ${err.message}`);
-//       return;
-//     }
-//     data = event.data.object;
-//     eventTypes = event.type;
-//   } else {
-//     data = req.body.data.object;
-//     eventTypes = req.body.type;
-//   }
-
-//   if (eventTypes === "checkout.session.completed") {
-//     console.log(data);
-//   }
-
-//   // // Handle the event
-//   // switch (event.type) {
-//   //   case "payment_intent.succeeded":
-//   //     const paymentIntentSucceeded = event.data.object;
-//   //     // Then define and call a function to handle the event payment_intent.succeeded
-//   //     break;
-//   //   // ... handle other event types
-//   //   default:
-//   //     console.log(`Unhandled event type ${event.type}`);
-//   // }
-
-//   // // Return a 200 response to acknowledge receipt of the event
-//   // res.send();
-// });

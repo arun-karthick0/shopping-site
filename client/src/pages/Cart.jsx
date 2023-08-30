@@ -26,7 +26,7 @@ const Cart = ({ user, setOrders, orders }) => {
   console.log(orders);
   const checkOut = () => {
     const data = {
-      user: user,
+      user: user.email,
       cartItems: CartItem,
       totalPrice: totalPrice,
     };
@@ -46,6 +46,7 @@ const Cart = ({ user, setOrders, orders }) => {
       });
   };
 
+  console.log(orders);
   return (
     <section className="cart-items">
       <Container>
