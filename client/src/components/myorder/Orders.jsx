@@ -7,7 +7,7 @@ const Orders = ({ orders, users }) => {
   console.log(users.email);
   useEffect(() => {
     axios
-      .get("http://localhost:8756/getdata", users.email)
+      .get("https://shopping-site-ejw5.onrender.com/getdata", users.email)
       .then((res) => {
         setData(res?.data);
       })
