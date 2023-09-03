@@ -24,11 +24,14 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [user, setUser] = useState("");
   const [orders, setOrders] = useState("");
+  const [id, setId] = useState();
 
   const navigate = useNavigate();
 
   const addToCart = (product, num = 1) => {
     const productExit = CartItem.find((item) => item.id === product.id);
+    setId(product.id);
+
     if (productExit) {
       setCartItem(
         CartItem.map((item) =>
@@ -42,7 +45,8 @@ function App() {
     }
   };
 
-  console.log(CartItem);
+  console.log(id);
+
   const decreaseQty = (product) => {
     const productExit = CartItem.find((item) => item.id === product.id);
     // If product quantity == 1 then we have to remove it

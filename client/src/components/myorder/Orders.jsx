@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import "./orders.css";
 const Orders = ({ orders, users }) => {
   const [data, setData] = useState("");
-  console.log(data);
-  console.log(users.email);
   useEffect(() => {
     axios
-      .get("https://shopping-site-ejw5.onrender.com/getdata", users.email)
+      .get(
+        "https://shopping-site-ejw5.onrender.com/getdata",
+        users.email
+      )
       .then((res) => {
         setData(res?.data);
       })
@@ -27,7 +28,6 @@ const Orders = ({ orders, users }) => {
                 <th>Price</th>
                 <th>Qty</th>
                 <th>delivery status</th>
-                <th>payment status</th>
               </tr>
             </thead>
             <tbody>
@@ -37,8 +37,7 @@ const Orders = ({ orders, users }) => {
                   <td>{item.productName}</td>
                   <td>{item.totalPrice}</td>
                   <td>{item.productQty}</td>
-                  <td>{orders ? "delivery soon" : "confirm-payment"}</td>
-                  <td>{orders ? "payment done " : "payment-not done"}</td>
+                  <td>{orders ? "-" : "progressing"}</td>
                 </tr>
               ))}
             </tbody>

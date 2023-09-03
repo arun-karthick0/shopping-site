@@ -34,9 +34,13 @@ const NavBar = ({ user }) => {
       className={isFixed ? "navbar fixed" : "navbar"}
     >
       <Container className="navbar-container">
-        <Navbar.Brand to="/">
+        <Navbar.Brand to={"/"}>
           <ion-icon name="bag"></ion-icon>
-          <h1 className="logo">shopping cart</h1>
+          <div className="logo">
+            <Link to={"/"} className="logo-img">
+              Shopping Cart
+            </Link>
+          </div>
         </Navbar.Brand>
 
         <div className="d-flex">

@@ -61,9 +61,18 @@ app.post("/create-checkout-session", async (req, res) => {
         paymentMode: "card",
       });
     });
-
+    // adding data
     await CheckoutSession.insertMany(checkoutSessions);
 
+    // if data available mean delate collection
+    if (CheckoutSession !== 0) {
+      await CheckoutSession.deleteMany({ email: email });
+    }
+
+    // create new collection for new orders
+    await CheckoutSession.insertMany(checkoutSessions);
+
+    console.log(checkoutSessions);
     res.send({ url: session.url });
   } catch (error) {
     console.log(error);
@@ -75,7 +84,6 @@ app.get("/getdata", async (req, res) => {
 
   try {
     const data = await CheckoutSession.find(email);
-    console.log(data);
     if (data.length === 0) {
       res.status(404).json({ error: "No data found for this email" });
     } else {

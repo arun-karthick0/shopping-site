@@ -9,8 +9,9 @@
   height: 280px;
   border-radius: 5px;
   right: 5%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   top: 150%;
-  background-color: #f7f7f7;
+  background-color: #eeeeee;
   transition: 0.5 all ease-in;
 }
 

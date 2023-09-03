@@ -5,8 +5,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 
 const Cart = ({ user, setOrders, orders }) => {
-  // console.log(user);
-
   const { CartItem, setCartItem, addToCart, decreaseQty, deleteProduct } =
     useContext(DataContainer);
   const totalPrice = CartItem.reduce(
@@ -23,7 +21,6 @@ const Cart = ({ user, setOrders, orders }) => {
   }, []);
 
   setOrders(CartItem);
-  console.log(orders);
   const checkOut = () => {
     const data = {
       user: user.email,
@@ -32,9 +29,12 @@ const Cart = ({ user, setOrders, orders }) => {
     };
 
     axios
-      .post("https://shopping-site-ejw5.onrender.com/create-checkout-session", {
-        data,
-      })
+      .post(
+        " https://shopping-site-ejw5.onrender.com/create-checkout-session",
+        {
+          data,
+        }
+      )
       .then((res) => {
         if (res.data.url) {
           window.location.href = res.data.url;

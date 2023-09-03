@@ -10,7 +10,7 @@ const Footer = () => {
           <Col md={3} sm={5} className="box">
             <div className="logo">
               <ion-icon name="bag"></ion-icon>
-              <h1>shopping cart</h1>
+              <div className="logo-img">shopping cart</div>
             </div>
             <p>
               The sale of services involves the exchange of monetary value in

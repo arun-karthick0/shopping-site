@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap");
+
 /* Navbar Section  */
 .navbar {
   position: relative !important;
@@ -125,6 +127,11 @@
 .cart {
   position: relative !important;
   z-index: 3;
+}
+
+.logo-img {
+  font-family: "Inconsolata", monospace;
+  font-weight: 300;
 }
 
 .cart::before {
