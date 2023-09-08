@@ -4,9 +4,8 @@ import "./orders.css";
 const Orders = ({ orders, users }) => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    // https://shopping-site-ejw5.onrender.com
     axios
-      .get("http://localhost:8756/getdata", {
+      .get("https://shopping-site-ejw5.onrender.com/getdata", {
         params: {
           email: users.email,
         },

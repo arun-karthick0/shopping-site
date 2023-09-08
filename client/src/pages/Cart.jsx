@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { DataContainer } from "../App";
 import { Col, Container, Row } from "react-bootstrap";
@@ -29,9 +29,9 @@ const Cart = ({ user, setOrders, orders }) => {
       cartItems: CartItem,
       totalPrice: totalPrice,
     };
-    // https://shopping-site-ejw5.onrender.com
+
     axios
-      .post(" http://localhost:8756/create-checkout-session", {
+      .post("https://shopping-site-ejw5.onrender.com/create-checkout-session", {
         data,
       })
       .then((res) => {
