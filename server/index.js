@@ -28,7 +28,8 @@ const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 app.post("/create-checkout-session", async (req, res) => {
   const email = req.body.data.user;
-  const line_items = req.body.data.cartItems.map((item) => {
+  const product = req.body.data.cartItems;
+  const line_items = product.map((item) => {
     return {
       price_data: {
         currency: "usd",
@@ -43,47 +44,57 @@ app.post("/create-checkout-session", async (req, res) => {
       quantity: item.qty,
     };
   });
-  const session = await stripe.checkout.sessions.create({
-    line_items,
-    mode: "payment",
-    success_url: "https://shopping-site-002.netlify.app/cart/success",
-    cancel_url: "https://shopping-site-002.netlify.app/cart/cancel",
-  });
 
   try {
-    const checkoutSessions = req.body.data.cartItems.map((item) => {
-      return new CheckoutSession({
-        email: email,
-        productName: item.productName,
-        productQty: item.qty,
-        productPrice: item.price,
-        totalPrice: item.price * item.qty,
-        paymentMode: "card",
-      });
+    const checkoutSessions = await Promise.all(
+      product.map(async (item) => {
+        const existingRecord = await CheckoutSession.findOne({
+          email: email,
+          productName: item.productName,
+        });
+
+        if (existingRecord) {
+          // Update the quantity
+          existingRecord.productQty += item.qty;
+          existingRecord.totalPrice += item.price * item.qty;
+          await existingRecord.save();
+        } else {
+          // Insert a new record
+          const newCheckoutSession = new CheckoutSession({
+            email: email,
+            productName: item.productName,
+            productQty: item.qty,
+            productPrice: item.price,
+            totalPrice: item.price * item.qty,
+            paymentMode: "card",
+          });
+          await newCheckoutSession.save();
+        }
+
+        return item;
+      })
+    );
+
+    const session = await stripe.checkout.sessions.create({
+      line_items,
+      mode: "payment",
+      success_url: "https://shopping-site-002.netlify.app/cart/success",
+      cancel_url: "https://shopping-site-002.netlify.app/cart/cancel",
     });
-    // adding data
-    await CheckoutSession.insertMany(checkoutSessions);
 
-    // if data available mean delate collection
-    if (CheckoutSession !== 0) {
-      await CheckoutSession.deleteMany({ email: email });
-    }
-
-    // create new collection for new orders
-    await CheckoutSession.insertMany(checkoutSessions);
-
-    console.log(checkoutSessions);
     res.send({ url: session.url });
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: "An error occurred" });
   }
 });
 
 app.get("/getdata", async (req, res) => {
-  const email = req.body.user;
+  const email = req.query.email; // Retrieve email from query parameters
 
   try {
-    const data = await CheckoutSession.find(email);
+    const data = await CheckoutSession.find({ email: email });
+    console.log(data);
     if (data.length === 0) {
       res.status(404).json({ error: "No data found for this email" });
     } else {

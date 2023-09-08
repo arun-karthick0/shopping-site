@@ -89,7 +89,12 @@ const NavBar = ({ user }) => {
                 to="/"
                 onClick={() => setExpand(false)}
               >
-                <span className="nav-link-label">Home</span>
+                <span
+                  style={{ marginBottom: "3px" }}
+                  className="nav-link-label"
+                >
+                  Home
+                </span>
               </Link>
             </Nav.Item>
 

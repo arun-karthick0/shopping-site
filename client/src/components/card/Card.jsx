@@ -15,13 +15,14 @@ function Card({ user }) {
   const logOut = () => {
     if (auth) {
       signOut(auth);
+      window.localStorage.removeItem("user");
       toast.success("logout");
     }
   };
 
   return (
     <div>
-      <button className="card" onClick={toggleCard}>
+      <button className="detail" onClick={toggleCard}>
         {user && (
           <div className="profile_circle">
             <div className="name">

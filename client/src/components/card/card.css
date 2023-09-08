@@ -1,8 +1,10 @@
-.card {
+.detail {
   border: none;
+  background-color: red;
+  background-color: #fff;
 }
 
-.card .card_info {
+.detail .card_info {
   position: absolute;
   width: 250px;
   z-index: 1;
@@ -15,7 +17,7 @@
   transition: 0.5 all ease-in;
 }
 
-.card .card_info .card_image img {
+.detail .card_info .card_image img {
   margin-top: 20px;
   border-radius: 50%;
   width: 60px;
@@ -23,17 +25,17 @@
   height: 60px;
 }
 
-.card .profile_circle {
+.detail .profile_circle {
   border: 1px solid black;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   margin-right: 15px;
   margin-bottom: 5px;
   background-color: rgb(77, 76, 76);
   border-radius: 60%;
 }
-.card .profile_circle .name {
-  font-size: 1rem;
+.detail .profile_circle .name {
+  font-size: 1.2rem;
   color: #fff;
 }
 

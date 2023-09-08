@@ -66,6 +66,7 @@ function Login({ user, setUser }) {
               // console.log(firstName, lastName, email, downloadUrl);
               setUser(newUser);
               console.log(user);
+             
               navigate("/");
               toast.success("Registration successful");
             })

@@ -20,6 +20,8 @@ const Cart = ({ user, setOrders, orders }) => {
     }
   }, []);
 
+  console.log(user.email);
+
   setOrders(CartItem);
   const checkOut = () => {
     const data = {
@@ -27,14 +29,11 @@ const Cart = ({ user, setOrders, orders }) => {
       cartItems: CartItem,
       totalPrice: totalPrice,
     };
-
+    // https://shopping-site-ejw5.onrender.com
     axios
-      .post(
-        " https://shopping-site-ejw5.onrender.com/create-checkout-session",
-        {
-          data,
-        }
-      )
+      .post(" http://localhost:8756/create-checkout-session", {
+        data,
+      })
       .then((res) => {
         if (res.data.url) {
           window.location.href = res.data.url;

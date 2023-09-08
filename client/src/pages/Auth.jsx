@@ -6,7 +6,6 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { getDoc, doc } from "firebase/firestore";
 
 function Auth({ user, setUser }) {
-  // console.log(user, setUser);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -38,6 +37,7 @@ function Auth({ user, setUser }) {
                 photoURL: `${userData?.photoURL}`,
               };
               setUser(user);
+              window.localStorage.setItem("user", userData.email);
               toast.success("Login successful");
               navigate("/");
             } else {
@@ -119,6 +119,10 @@ function Auth({ user, setUser }) {
                 SignUp
               </Link>
             </span>
+            <div style={{ textAlign: "center", fontWeight: "500" }}>
+              <p>Email:arun@gmail.com</p>
+              <p>password:123456</p>
+            </div>
           </div>
         </div>
       </div>

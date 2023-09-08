@@ -45,8 +45,6 @@ function App() {
     }
   };
 
-  console.log(id);
-
   const decreaseQty = (product) => {
     const productExit = CartItem.find((item) => item.id === product.id);
     // If product quantity == 1 then we have to remove it
