@@ -29,15 +29,18 @@ const Cart = ({ user, setOrders, orders }) => {
       cartItems: CartItem,
       totalPrice: totalPrice,
     };
-
     axios
-      .post("https://shopping-site-ejw5.onrender.com/create-checkout-session", {
-        data,
-      })
+      .post(
+        " https://shopping-site-ejw5.onrender.com/create-checkout-session",
+        {
+          data,
+        }
+      )
       .then((res) => {
         if (res.data.url) {
           window.location.href = res.data.url;
         }
+        window.localStorage.removeItem("cartItem");
         setOrders(true);
       })
       .catch((err) => {
@@ -45,7 +48,6 @@ const Cart = ({ user, setOrders, orders }) => {
       });
   };
 
-  console.log(orders);
   return (
     <section className="cart-items">
       <Container>

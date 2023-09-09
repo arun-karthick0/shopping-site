@@ -16,6 +16,8 @@ function Card({ user }) {
     if (auth) {
       signOut(auth);
       window.localStorage.removeItem("user");
+      window.localStorage.removeItem("orders");
+      
       toast.success("logout");
     }
   };
