@@ -17,7 +17,7 @@ const Orders = ({ orders, users }) => {
         window.localStorage.setItem("orders", JSON.stringify(res.data));
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [users]);
 
   return (
     <div className="order_content">
