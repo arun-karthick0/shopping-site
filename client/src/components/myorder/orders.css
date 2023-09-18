@@ -8,7 +8,8 @@
 }
 table {
   width: 1000px;
-  height: 150px;
+  height: 150px !important;
+  margin: 30px 100px;
 }
 
 .order_item {

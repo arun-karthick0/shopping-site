@@ -13,6 +13,7 @@ import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
 import Auth from "./pages/Auth";
 import Orders from "./components/myorder/Orders";
+import axios from "axios";
 
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
@@ -25,8 +26,23 @@ function App() {
   const [user, setUser] = useState("");
   const [orders, setOrders] = useState("");
   const [id, setId] = useState();
+  const [data, setData] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(" https://shopping-site-ejw5.onrender.com/getdata", {
+        params: {
+          email: user?.email,
+        },
+      })
+      .then((res) => {
+        setData(res?.data);
+        window.localStorage.setItem("orders", JSON.stringify(res.data));
+      })
+      .catch((err) => console.log(err));
+  }, [user, data]);
 
   const addToCart = (product, num = 1) => {
     const productExit = CartItem.find((item) => item.id === product.id);
@@ -131,9 +147,7 @@ function App() {
           <Route path="/cart/cancel" element={<Cancel />} />
           <Route
             path="/orders"
-            element={
-              <Orders orders={orders} cartItem={CartItem} users={user} />
-            }
+            element={<Orders orders={orders} cartItem={CartItem} data={data} />}
           />
         </Routes>
         <Footer />

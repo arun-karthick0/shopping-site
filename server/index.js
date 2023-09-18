@@ -90,7 +90,7 @@ app.post("/create-checkout-session", async (req, res) => {
 });
 
 app.get("/getdata", async (req, res) => {
-  const email = req.query.email; // Retrieve email from query parameters
+  const email = req.query.email;
 
   try {
     const data = await CheckoutSession.find({ email: email });

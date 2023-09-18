@@ -1,23 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import "./orders.css";
-const Orders = ({ orders, users }) => {
-  const user = window.localStorage.getItem("user");
 
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios
-      .get(" https://shopping-site-ejw5.onrender.com/getdata", {
-        params: {
-          email: users.email,
-        },
-      })
-      .then((res) => {
-        setData(res?.data);
-        window.localStorage.setItem("orders", JSON.stringify(res.data));
-      })
-      .catch((err) => console.log(err));
-  }, [users]);
+import "./orders.css";
+const Orders = ({ orders, users, data }) => {
+  const user = window.localStorage.getItem("user");
 
   return (
     <div className="order_content">

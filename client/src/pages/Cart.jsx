@@ -20,8 +20,6 @@ const Cart = ({ user, setOrders, orders }) => {
     }
   }, []);
 
-  console.log(user.email);
-
   setOrders(CartItem);
   const checkOut = () => {
     const data = {
@@ -38,16 +36,16 @@ const Cart = ({ user, setOrders, orders }) => {
       )
       .then((res) => {
         if (res.data.url) {
-          window.location.href = res.data.url;
+          window.location.href = res?.data?.url;
+          setOrders(true);
         }
-        window.localStorage.removeItem("cartItem");
-        setOrders(true);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  window.localStorage.removeItem("cartItem");
   return (
     <section className="cart-items">
       <Container>
