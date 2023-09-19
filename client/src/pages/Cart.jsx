@@ -28,15 +28,13 @@ const Cart = ({ user, setOrders, orders }) => {
       totalPrice: totalPrice,
     };
     axios
-      .post(
-        " https://shopping-site-ejw5.onrender.com/create-checkout-session",
-        {
-          data,
-        }
-      )
+      .post("/create-checkout-session", {
+        data,
+      })
       .then((res) => {
         if (res.data.url) {
-          window.location.href = res?.data?.url;
+          window.location.href = res.data.url;
+          // console.log(res.data.url);
           setOrders(true);
         }
       })

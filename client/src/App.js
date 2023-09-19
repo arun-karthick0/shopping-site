@@ -15,6 +15,9 @@ import Auth from "./pages/Auth";
 import Orders from "./components/myorder/Orders";
 import axios from "axios";
 
+axios.defaults.baseURL = "https://shopping-site-ejw5.onrender.com";
+// axios.defaults.baseURL = "http://localhost:8756";
+
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
 const Cart = lazy(() => import("./pages/Cart"));
@@ -32,17 +35,17 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(" https://shopping-site-ejw5.onrender.com/getdata", {
+      .get("/getdata", {
         params: {
           email: user?.email,
         },
       })
       .then((res) => {
         setData(res?.data);
-        window.localStorage.setItem("orders", JSON.stringify(res.data));
+        // window.localStorage.setItem("orders", JSON.stringify(res.data));
       })
-      .catch((err) => console.log(err));
-  }, [user, data]);
+      .catch((err) => console.log(err.code));
+  }, [orders, user]);
 
   const addToCart = (product, num = 1) => {
     const productExit = CartItem.find((item) => item.id === product.id);
