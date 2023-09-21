@@ -7,14 +7,14 @@ import axios from "axios";
 const Cart = ({ user, setOrders, orders }) => {
   const { CartItem, setCartItem, addToCart, decreaseQty, deleteProduct } =
     useContext(DataContainer);
-  const totalPrice = CartItem.reduce(
+  const totalPrice = CartItem?.reduce(
     (price, item) => price + item.qty * item.price,
     0
   );
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (CartItem.length === 0) {
+    if (CartItem?.length === 0) {
       const storedCart = localStorage.getItem("cartItem");
       setCartItem(JSON.parse(storedCart));
     }
@@ -49,10 +49,10 @@ const Cart = ({ user, setOrders, orders }) => {
       <Container>
         <Row className="justify-content-center">
           <Col md={8}>
-            {CartItem.length === 0 && (
+            {CartItem?.length === 0 && (
               <h1 className="no-items product">No Items are add in Cart</h1>
             )}
-            {CartItem.map((item) => {
+            {CartItem?.map((item) => {
               const productQty = item.price * item.qty;
               return (
                 <div className="cart-list" key={item.id}>

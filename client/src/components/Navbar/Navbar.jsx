@@ -61,7 +61,7 @@ const NavBar = ({ user }) => {
               aria-label="Go to Cart Page"
               to="/cart"
               className="cart"
-              data-num={CartItem.length}
+              data-num={CartItem?.length}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +133,7 @@ const NavBar = ({ user }) => {
                 aria-label="Go to Cart Page"
                 to="/cart"
                 className="cart"
-                data-num={CartItem.length}
+                data-num={CartItem?.length}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

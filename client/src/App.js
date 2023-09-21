@@ -42,19 +42,19 @@ function App() {
       })
       .then((res) => {
         setData(res?.data);
-        // window.localStorage.setItem("orders", JSON.stringify(res.data));
+        window.localStorage.setItem("orders", JSON.stringify(res.data));
       })
       .catch((err) => console.log(err.code));
   }, [orders, user]);
 
   const addToCart = (product, num = 1) => {
-    const productExit = CartItem.find((item) => item.id === product.id);
+    const productExit = CartItem?.find((item) => item.id === product.id);
     setId(product.id);
 
     if (productExit) {
       setCartItem(
-        CartItem.map((item) =>
-          item.id === product.id
+        CartItem?.map((item) =>
+          item?.id === product?.id
             ? { ...productExit, qty: productExit.qty + num }
             : item
         )
@@ -65,13 +65,13 @@ function App() {
   };
 
   const decreaseQty = (product) => {
-    const productExit = CartItem.find((item) => item.id === product.id);
+    const productExit = CartItem?.find((item) => item.id === product.id);
     // If product quantity == 1 then we have to remove it
-    if (productExit.qty === 1) {
-      setCartItem(CartItem.filter((item) => item.id !== product.id));
+    if (productExit?.qty === 1) {
+      setCartItem(CartItem?.filter((item) => item.id !== product.id));
     } else {
       setCartItem(
-        CartItem.map((item) =>
+        CartItem?.map((item) =>
           item.id === product.id
             ? { ...productExit, qty: productExit.qty - 1 }
             : item
@@ -81,7 +81,7 @@ function App() {
   };
 
   const deleteProduct = (product) => {
-    setCartItem(CartItem.filter((item) => item.id !== product.id));
+    setCartItem(CartItem?.filter((item) => item.id !== product.id));
   };
   useEffect(() => {
     localStorage.setItem("cartItem", JSON.stringify(CartItem));
