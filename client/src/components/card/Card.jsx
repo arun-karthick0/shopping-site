@@ -28,9 +28,9 @@ function Card({ user }) {
         {user && (
           <div className="profile_circle">
             <div className="name">
-              {user.displayName
-                ? user.displayName[0].toUpperCase()
-                : user.email[0].toUpperCase()}
+              {user?.displayName
+                ? user?.displayName[0].toUpperCase()
+                : user?.email[0].toUpperCase()}
             </div>
           </div>
         )}

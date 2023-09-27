@@ -22,6 +22,10 @@ const Cart = ({ user, setOrders, orders }) => {
 
   setOrders(CartItem);
   const checkOut = () => {
+    alert(`  cardNo----->4242-4242-4242-4242
+    mm/yy----->12/33
+    cvv----->123`);
+
     const data = {
       user: user.email,
       cartItems: CartItem,
@@ -36,6 +40,7 @@ const Cart = ({ user, setOrders, orders }) => {
           window.location.href = res.data.url;
           // console.log(res.data.url);
           setOrders(true);
+          setCartItem([]);
         }
       })
       .catch((err) => {
@@ -43,7 +48,6 @@ const Cart = ({ user, setOrders, orders }) => {
       });
   };
 
-  window.localStorage.removeItem("cartItem");
   return (
     <section className="cart-items">
       <Container>
