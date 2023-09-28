@@ -15,17 +15,13 @@ const Cart = ({ user, setOrders, orders }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (CartItem?.length === 0) {
-      const storedCart = localStorage.getItem("cartItem");
+      const storedCart = localStorage.getItem("cartItem") || 0;
       setCartItem(JSON.parse(storedCart));
     }
   }, []);
 
   setOrders(CartItem);
   const checkOut = () => {
-    alert(`  cardNo----->4242-4242-4242-4242
-    mm/yy----->12/33
-    cvv----->123`);
-
     const data = {
       user: user.email,
       cartItems: CartItem,
@@ -40,7 +36,6 @@ const Cart = ({ user, setOrders, orders }) => {
           window.location.href = res.data.url;
           // console.log(res.data.url);
           setOrders(true);
-          setCartItem([]);
         }
       })
       .catch((err) => {
@@ -111,6 +106,18 @@ const Cart = ({ user, setOrders, orders }) => {
 
             {user ? (
               <div>
+                <div id="card_details">
+                  <span className="card_details">
+                    <strong>CardNo:</strong> 4242-4242-4242-4242
+                  </span>
+                  <span className="card_details">
+                    <strong>mm/yy:</strong>
+                    12/33
+                  </span>
+                  <span className="card_details">
+                    <strong>cvv:</strong>123
+                  </span>
+                </div>
                 <button
                   onClick={checkOut}
                   className="btn btn-success w-100"

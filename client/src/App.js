@@ -18,7 +18,6 @@ import axios from "axios";
 axios.defaults.baseURL = "https://shopping-site-ejw5.onrender.com";
 // axios.defaults.baseURL = "http://localhost:8756";
 
-
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
 const Cart = lazy(() => import("./pages/Cart"));
@@ -63,8 +62,6 @@ function App() {
       setCartItem([...CartItem, { ...product, qty: num }]);
     }
   };
-
-  console.log(CartItem);
 
   const decreaseQty = (product) => {
     const productExit = CartItem?.find((item) => item?.id === product?.id);
